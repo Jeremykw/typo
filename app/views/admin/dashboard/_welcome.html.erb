@@ -8,7 +8,7 @@
   <ul>
     <li> <%= sprintf("%s %d", link_to(_("Total posts:"), :controller => 'admin/content'), @statposts) %></li>
     <li> <%= sprintf("%s %d", link_to(_("Your posts:"), :controller => 'admin/content', 'search[user_id]' => current_user.id), @statuserposts) %></li>
-    <li> <%= sprintf("%s %d", link_to(_("Categories:"), :controller => 'admin/categories'), @categories) %></li>
+    <li> <%= sprintf("%s %d", link_to(_("Categories:"), :controller => 'admin/categories'), @categories )%></li>
   </ul>
 
   <p><strong><%= _("Feedback") %></strong></p>

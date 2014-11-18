@@ -24,6 +24,7 @@ class Admin::CategoriesController < Admin::BaseController
   private
 
   def new_or_edit
+    #params[:id] = current_user.id
     @categories = Category.find(:all)
     @category = Category.find(params[:id])
     @category.attributes = params[:category]
