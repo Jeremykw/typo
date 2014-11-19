@@ -31,19 +31,24 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Given /^the blog is set up$/ do
+##
+# Log in as Admin
+##
+
+Given /^the blog is set up as admin$/ do
   Blog.default.update_attributes!({:blog_name => 'Teh Blag',
                                    :base_url => 'http://localhost:3000'});
   Blog.default.save!
-  User.create!({:login => 'admin',
+  @user = User.create!({:login => 'admin',
                 :password => 'aaaaaaaa',
+                :id => 1,
                 :email => 'joe@snow.com',
                 :profile_id => 1,
                 :name => 'admin',
                 :state => 'active'})
 end
 
-And /^I am logged into the admin panel$/ do
+And /^I am logged into the admin panel as admin$/ do
   visit '/accounts/login'
   fill_in 'user_login', :with => 'admin'
   fill_in 'user_password', :with => 'aaaaaaaa'
@@ -53,6 +58,38 @@ And /^I am logged into the admin panel$/ do
   else
     assert page.has_content?('Login successful')
   end
+end
+
+##
+# Log in as Contributer
+##
+Given /^the blog is set up as contributer$/ do
+  Blog.default.update_attributes!({:blog_name => 'Teh Blag',
+                                   :base_url => 'http://localhost:3000'});
+  Blog.default.save!
+  @user = User.create!({:login => 'contributer',
+                :password => 'bbbbbbbb',
+                :id => 2,
+                :email => 'joe@snow.com',
+                :profile_id => 2,
+                :name => 'contributer',
+                :state => 'active'})
+end
+And /^I am logged into the admin panel as contributer$/ do
+  visit '/accounts/login'
+  fill_in 'user_login', :with => 'contributer'
+  fill_in 'user_password', :with => 'bbbbbbbb'
+  click_button 'Login'
+  if page.respond_to? :should
+    page.should have_content('Login successful')
+  else
+    assert page.has_content?('Login successful')
+  end
+end
+
+Given /^I am logged out$/ do
+  visit 'admin/users'
+  click_button 'logout'
 end
 
 # Single-line step scoper

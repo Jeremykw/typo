@@ -16,6 +16,15 @@ describe Admin::CategoriesController do
     assert_response :redirect, :action => 'index'
   end
 
+  describe "test_new" do
+    it "should assign @category" do
+      get :new, :id => Factory(:category).id
+      assigns[:category].should_not be_nil
+      assigns[:category].should_not == Factory(:category)
+
+      #@category = Category.find(params[:id])
+    end
+  end
   describe "test_edit" do
     before(:each) do
       get :edit, :id => Factory(:category).id

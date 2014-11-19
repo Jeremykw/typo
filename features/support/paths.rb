@@ -24,6 +24,12 @@ module NavigationHelpers
     when /^the Categories page$/
       '/admin/categories/new'
 
+    when /^the Second_Blog page$/
+      '/admin/content/edit/2002' 
+
+    when /^the First_Blog page$/
+      '/admin/content/edit/1001'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

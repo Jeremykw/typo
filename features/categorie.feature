@@ -4,8 +4,8 @@ Feature: New Categorie
   I want to create a new categorie
 
   Background:
-    Given the blog is set up
-    And I am logged into the admin panel
+    Given the blog is set up as admin
+    And I am logged into the admin panel as admin
 
   Scenario: Create new catagorie
     Given I am on the admin page
